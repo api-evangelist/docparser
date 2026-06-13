@@ -1,0 +1,98 @@
+name: Docparser API Rate Limits
+description: >-
+  The Docparser REST API enforces per-minute rate limits on result retrieval
+  endpoints to ensure platform stability. Document upload and fetch operations
+  are governed by plan-level credit quotas (one credit per document up to five
+  pages) rather than per-minute limits. All API calls must use HTTPS; HTTP
+  requests are automatically rejected.
+version: '0.1'
+url: https://docparser.com/api/
+limits:
+  - name: Single Document Results
+    description: >-
+      Maximum number of calls per minute to the GET /v1/results/{parser_id}/{document_id}
+      endpoint for retrieving parsed data for a single specific document.
+    endpoint: GET /v1/results/{parser_id}/{document_id}
+    rate: 60
+    period: minute
+    scope: account
+
+  - name: Multiple Document Results
+    description: >-
+      Maximum number of calls per minute to the GET /v1/results/{parser_id}
+      endpoint for retrieving parsed data for multiple documents within a parser.
+    endpoint: GET /v1/results/{parser_id}
+    rate: 30
+    period: minute
+    scope: account
+
+  - name: Document Credits (Starter Monthly)
+    description: >-
+      Monthly document parsing credit limit for the Starter plan. Each credit
+      covers one document up to five pages. Credits reset monthly.
+    type: credit-quota
+    plan: Starter
+    billingPeriod: monthly
+    quota: 100
+    unit: documents
+    resetPeriod: monthly
+
+  - name: Document Credits (Professional Monthly)
+    description: >-
+      Monthly document parsing credit limit for the Professional plan.
+    type: credit-quota
+    plan: Professional
+    billingPeriod: monthly
+    quota: 250
+    unit: documents
+    resetPeriod: monthly
+
+  - name: Document Credits (Business Monthly)
+    description: >-
+      Monthly document parsing credit limit for the Business plan.
+    type: credit-quota
+    plan: Business
+    billingPeriod: monthly
+    quota: 1000
+    unit: documents
+    resetPeriod: monthly
+
+  - name: Document Credits (Starter Annual)
+    description: >-
+      Annual document parsing credit pool for the Starter annual plan.
+    type: credit-quota
+    plan: Starter
+    billingPeriod: annual
+    quota: 1200
+    unit: documents
+    resetPeriod: annual
+
+  - name: Document Credits (Professional Annual)
+    description: >-
+      Annual document parsing credit pool for the Professional annual plan.
+    type: credit-quota
+    plan: Professional
+    billingPeriod: annual
+    quota: 3000
+    unit: documents
+    resetPeriod: annual
+
+  - name: Document Credits (Business Annual)
+    description: >-
+      Annual document parsing credit pool for the Business annual plan.
+    type: credit-quota
+    plan: Business
+    billingPeriod: annual
+    quota: 12000
+    unit: documents
+    resetPeriod: annual
+
+transport:
+  - requirement: HTTPS only
+    description: All API requests must use HTTPS. HTTP requests are automatically rejected.
+
+authentication:
+  - method: HTTP Basic Auth
+    description: API key used as the username with an empty password field (recommended)
+  - method: API Key Header
+    description: Pass the API key via the api_key header, POST body field, or URL parameter

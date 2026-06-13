@@ -1,0 +1,146 @@
+name: Docparser FinOps Framework
+description: >-
+  FinOps cost management guidance for Docparser API usage aligned with the
+  FinOps Foundation FOCUS specification. Docparser's consumption model is
+  credit-based where one parsing credit equals one document processed up to
+  five pages. Cost optimization focuses on right-sizing the plan to actual
+  monthly document volume, using annual billing for predictable workloads,
+  and monitoring credit consumption to avoid overages or unnecessary
+  over-provisioning.
+version: '1.0'
+specificationVersion: FOCUS-1.0
+url: https://docparser.com/pricing/
+
+costModel:
+  type: credit-based-subscription
+  description: >-
+    Docparser charges a fixed monthly or annual subscription that includes a
+    set number of parsing credits. There are no per-API-call charges beyond the
+    credit system. Credits represent documents processed (up to 5 pages each).
+    Unused credits do not roll over on monthly plans. Annual plans pre-purchase
+    a yearly credit pool at a 20% discount.
+  unit: parsing credit
+  unitDefinition: One document processed, up to 5 pages per document
+
+billingDimensions:
+  - name: Parsing Credits
+    description: Core consumption unit; one credit per document (up to 5 pages)
+    metricName: documents_parsed
+    unit: credit
+
+  - name: Subscription Tier
+    description: Plan level (Starter, Professional, Business, Enterprise)
+    metricName: plan_tier
+
+  - name: Billing Frequency
+    description: Monthly vs annual billing with 20% discount for annual commitment
+    metricName: billing_period
+
+costOptimization:
+  recommendations:
+    - name: Right-size plan to actual volume
+      description: >-
+        Monitor monthly credit consumption and match the plan to actual average
+        usage. Avoid paying for unused credits; upgrade only when consistently
+        near the limit.
+      impact: high
+
+    - name: Commit to annual billing for stable workloads
+      description: >-
+        Annual plans offer a 20% discount versus monthly billing. For workloads
+        with predictable document volumes, annual commitment reduces total cost.
+      impact: high
+      savingsEstimate: 20%
+
+    - name: Optimize page count per document
+      description: >-
+        Each credit covers documents up to 5 pages. Splitting documents at the
+        5-page boundary maximizes credit efficiency. Documents exceeding 5 pages
+        consume additional credits.
+      impact: medium
+
+    - name: Use webhooks instead of polling
+      description: >-
+        Polling the results endpoint consumes API rate limit capacity (30-60
+        calls/minute) and increases latency risk. Webhooks deliver parsed data
+        immediately when ready, reducing unnecessary API calls and improving
+        efficiency.
+      impact: medium
+
+    - name: Batch document uploads
+      description: >-
+        Where workflow allows, batch document submissions rather than processing
+        one at a time to make efficient use of plan features and reduce
+        integration overhead.
+      impact: low
+
+    - name: Evaluate add-on necessity
+      description: >-
+        Add-ons (Parsing Assistant, Extended Retention, MFA, Version Control,
+        Multi-Layout) add cost. Evaluate whether each add-on delivers measurable
+        business value before purchasing.
+      impact: medium
+
+allocation:
+  dimensions:
+    - parser_id
+    - remote_id
+    - document_type
+  description: >-
+    Use the remote_id parameter when uploading documents to tag each document
+    with an external system identifier (project, department, cost center).
+    This enables cost attribution reporting by business unit or workflow.
+
+budgeting:
+  guidance: >-
+    Set monthly budget alerts based on expected document volume. Monitor the
+    plan credit consumption via the Docparser dashboard. For annual plans,
+    track cumulative credit burn rate against the annual pool to project
+    end-of-year surplus or deficit.
+  alertThresholds:
+    - threshold: 75%
+      action: Review processing queue and assess whether upgrade is needed
+    - threshold: 90%
+      action: Consider immediate plan upgrade or throttle non-critical document batches
+    - threshold: 100%
+      action: Credits exhausted; additional documents will not be processed until reset or upgrade
+
+forecasting:
+  method: >-
+    Track average daily document volume over a 30-day rolling window. Multiply
+    by 30 to project monthly credit need. Add a 15-20% buffer for volume spikes.
+    Compare projected need against current plan credit allocation to identify
+    right-sizing opportunities each quarter.
+
+plans:
+  - plan: Starter
+    monthlyCredits: 100
+    annualCredits: 1200
+    monthlyCost: 39.00
+    annualMonthlyCost: 32.50
+    costPerCredit:
+      monthly: 0.39
+      annual: 0.325
+
+  - plan: Professional
+    monthlyCredits: 250
+    annualCredits: 3000
+    monthlyCost: 74.00
+    annualMonthlyCost: 61.50
+    costPerCredit:
+      monthly: 0.296
+      annual: 0.246
+
+  - plan: Business
+    monthlyCredits: 1000
+    annualCredits: 12000
+    monthlyCost: 159.00
+    annualMonthlyCost: 133.00
+    costPerCredit:
+      monthly: 0.159
+      annual: 0.133
+
+  - plan: Enterprise
+    monthlyCredits: custom
+    monthlyCost: custom
+    notes: Negotiate based on volume commitments; highest volume yields lowest per-credit cost

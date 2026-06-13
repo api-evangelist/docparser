@@ -1,0 +1,80 @@
+aid: docparser
+name: Docparser
+description: >-
+  Docparser is a document data extraction REST API that enables developers and
+  businesses to parse structured data from PDFs, Word documents, and scanned
+  image files using custom parsing rules. The platform supports advanced zonal
+  OCR, pattern recognition, and anchor keyword detection for automating data
+  extraction from invoices, contracts, purchase orders, bank statements, HR
+  forms, and shipping documents. Docparser provides a REST API with endpoints
+  for uploading documents, fetching parsed results, managing parsers, and
+  re-processing documents, along with webhook support for real-time data
+  delivery and official SDKs for PHP, Node.js, and Salesforce Apex.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/docparser/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Document Parsing
+  - Data Extraction
+  - PDF
+  - OCR
+  - Document Automation
+  - Invoices
+  - Contracts
+  - REST API
+apis:
+  - aid: docparser:docparser-rest-api
+    name: Docparser REST API
+    description: >-
+      The Docparser REST API provides programmatic access to document parsing
+      and data extraction capabilities. Developers can upload documents via file
+      upload, base64 encoding, or public URL fetch, retrieve parsed results for
+      individual or multiple documents, manage parser configurations, and trigger
+      re-parsing or re-integration operations. The API uses HTTP Basic Auth with
+      the API key as the username and enforces per-minute rate limits on result
+      retrieval endpoints.
+    humanURL: https://docparser.com/api/
+    baseURL: https://api.docparser.com/v1
+    tags:
+      - Document Parsing
+      - PDF Extraction
+      - OCR
+      - REST API
+    properties:
+      - type: Documentation
+        url: https://docparser.com/api/
+      - type: OpenAPI
+        url: https://docparser.com/api/
+common:
+  - type: Website
+    url: https://docparser.com
+  - type: Documentation
+    url: https://docparser.com/api/
+  - type: GitHubOrg
+    url: https://github.com/Docparser
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/docparser
+  - type: X
+    url: https://x.com/docparser
+  - type: Blog
+    url: https://docparser.com/blog/
+  - type: Pricing
+    url: https://docparser.com/pricing/
+  - type: StatusPage
+    url: https://status.docparser.com/
+  - type: Webhooks
+    url: https://docparser.com/integrations/webhooks/
+  - type: SDKs
+    url: https://github.com/Docparser
+  - type: Plans
+    url: plans/docparser-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/docparser-rate-limits.yml
+  - type: FinOps
+    url: finops/docparser-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

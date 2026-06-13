@@ -1,0 +1,131 @@
+name: Docparser Plans and Pricing
+description: >-
+  Docparser offers four pricing tiers based on monthly parsing credits (where
+  one credit equals one document up to five pages), number of parsers, and
+  available features. Annual plans provide a 20% discount over monthly billing.
+  A 14-day free trial is available with no credit card required. Enterprise
+  customers can negotiate custom credit volumes, parser counts, white-labeling,
+  and extended data retention.
+version: '0.1'
+url: https://docparser.com/pricing/
+plans:
+  - name: Starter
+    description: >-
+      Entry-level plan for individuals and small teams needing basic document
+      parsing with PDF, Word, and image file support and standard integrations.
+    monthlyPrice: 39.00
+    annualMonthlyPrice: 32.50
+    currency: USD
+    billingPeriod: monthly
+    credits:
+      monthly: 100
+      annual: 1200
+      unit: documents (up to 5 pages each)
+    parsers: 15
+    features:
+      - Parse PDF, Word, and image files
+      - Premium template access
+      - Smart checkboxes
+      - Multi-format export (Excel, Google Sheets, JSON, XML, CSV)
+      - Standard integrations (Zapier, Workato, Power Automate)
+      - Email support
+    trialAvailable: true
+    trialDays: 14
+    trialCreditCard: false
+
+  - name: Professional
+    description: >-
+      Mid-tier plan for growing teams requiring advanced table extraction, team
+      management, and a free initial parser setup service.
+    monthlyPrice: 74.00
+    annualMonthlyPrice: 61.50
+    currency: USD
+    billingPeriod: monthly
+    credits:
+      monthly: 250
+      annual: 3000
+      unit: documents (up to 5 pages each)
+    parsers: 50
+    features:
+      - Everything in Starter
+      - Teams and managed users
+      - Smart tables extraction
+      - 1 free parser setup (Parsing Assistant)
+      - Priority email support
+    trialAvailable: true
+    trialDays: 14
+    trialCreditCard: false
+
+  - name: Business
+    description: >-
+      High-volume plan for business teams processing large document batches with
+      priority support and advanced parsing access.
+    monthlyPrice: 159.00
+    annualMonthlyPrice: 133.00
+    currency: USD
+    billingPeriod: monthly
+    credits:
+      monthly: 1000
+      annual: 12000
+      unit: documents (up to 5 pages each)
+    parsers: 500
+    features:
+      - Everything in Professional
+      - Priority support
+      - Advanced parsing access
+      - Multi-layout parsers (add-on)
+      - Parser version control (add-on)
+      - Extended data retention (add-on)
+      - MFA enforcement (add-on)
+    trialAvailable: true
+    trialDays: 14
+    trialCreditCard: false
+
+  - name: Enterprise
+    description: >-
+      Custom enterprise plan for large organizations requiring unlimited parsers,
+      white-labeling, custom data retention policies, and dedicated support.
+    monthlyPrice: custom
+    annualMonthlyPrice: custom
+    currency: USD
+    billingPeriod: custom
+    credits:
+      monthly: custom
+      annual: custom
+      unit: documents (up to 5 pages each)
+    parsers: unlimited
+    features:
+      - Everything in Business
+      - White-labeling license
+      - Extended data retention (custom)
+      - Unlimited parsers
+      - Custom integrations
+      - Dedicated account manager
+      - SLA agreement
+      - MFA enforcement
+      - Parser version control
+    trialAvailable: false
+    contactSales: true
+
+addons:
+  - name: Parsing Assistant
+    description: Professional setup service for one parser layout by the Docparser team
+    price: 149.00
+    currency: USD
+    unit: per layout
+  - name: Extended Retention
+    description: Extended document data retention beyond default period
+    price: custom
+    currency: USD
+  - name: MFA Enforcement
+    description: Multi-factor authentication enforcement for team accounts
+    price: custom
+    currency: USD
+  - name: Parser Version Control
+    description: Version history and rollback for parser configuration changes
+    price: custom
+    currency: USD
+  - name: Multi-Layout Support
+    description: Support for multiple parsing layouts within a single parser
+    price: custom
+    currency: USD
