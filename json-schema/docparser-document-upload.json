@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/docparser/main/json-schema/docparser-document-upload.json",
+  "title": "Docparser Document Upload Response",
+  "description": "Response returned when a document is successfully uploaded to a Docparser parser.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier assigned to the uploaded document.",
+      "examples": ["doc_abc123"]
+    },
+    "file_size": {
+      "type": "integer",
+      "description": "Size of the uploaded file in bytes.",
+      "examples": [204800]
+    },
+    "quota_used": {
+      "type": "integer",
+      "description": "Number of quota units consumed by this upload.",
+      "examples": [1]
+    },
+    "quota_left": {
+      "type": "integer",
+      "description": "Remaining quota units in the current billing period.",
+      "examples": [499]
+    }
+  },
+  "required": ["id"],
+  "additionalProperties": false
+}

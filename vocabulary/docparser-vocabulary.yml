@@ -1,0 +1,166 @@
+vocabulary:
+  - term: parser
+    definition: >-
+      A configured document parsing template in Docparser that defines the
+      extraction rules, OCR settings, field mappings, and anchor patterns used
+      to extract structured data from uploaded documents.
+    related:
+      - parser_id
+      - model_layout
+      - parsing_rules
+
+  - term: parser_id
+    definition: >-
+      The unique identifier (alphanumeric string) assigned to a parser in a
+      Docparser account. Used as a path parameter in all document and results
+      API endpoints.
+    related:
+      - parser
+
+  - term: document
+    definition: >-
+      A file (PDF, DOCX, or scanned image) uploaded to a Docparser parser for
+      data extraction. Each document is assigned a unique document_id after
+      upload.
+    related:
+      - document_id
+      - file_upload
+      - base64_upload
+      - url_fetch
+
+  - term: document_id
+    definition: >-
+      The unique identifier assigned to a specific document after it has been
+      uploaded to a Docparser parser. Used to retrieve parsed results for that
+      document.
+    related:
+      - document
+      - parsed_result
+
+  - term: remote_id
+    definition: >-
+      An optional custom identifier provided by the developer at upload time to
+      associate a Docparser document with a record in an external system
+      (e.g., an order ID, CRM record ID). Enables filtering results by this
+      identifier.
+    related:
+      - document
+
+  - term: model_layout
+    definition: >-
+      A specific parsing template layout within a parser that targets a
+      particular document format or variant. Parsers can have multiple model
+      layouts to handle variations in document structure.
+    related:
+      - parser
+
+  - term: parsed_result
+    definition: >-
+      The structured data extracted from a document by a Docparser parser.
+      Results include standard metadata fields (id, file_name, uploaded_at,
+      processed_at) plus custom fields defined by the parser rules
+      (e.g., invoice_number, total_amount).
+    related:
+      - document_id
+      - parser_id
+
+  - term: zonal_ocr
+    definition: >-
+      An OCR technique used by Docparser that extracts text from specific
+      rectangular zones of a document page, enabling precise field capture
+      based on position.
+    related:
+      - ocr
+      - anchor_keyword
+
+  - term: anchor_keyword
+    definition: >-
+      A fixed text string used by Docparser as a reference point to locate
+      adjacent data fields in a document, enabling extraction of values near
+      known labels (e.g., extracting a number after "Invoice #:").
+    related:
+      - zonal_ocr
+      - model_layout
+
+  - term: ocr
+    definition: >-
+      Optical Character Recognition — the process of converting scanned images
+      or image-based PDFs into machine-readable text, which Docparser then
+      processes through parsing rules to extract structured data.
+    related:
+      - zonal_ocr
+
+  - term: webhook
+    definition: >-
+      An HTTP callback configured in Docparser that delivers parsed results to
+      a specified endpoint in real time whenever a document finishes processing,
+      eliminating the need to poll the results API.
+    related:
+      - integration
+      - reintegrate
+
+  - term: reparse
+    definition: >-
+      The action of re-running parsing rules against previously uploaded
+      documents in a parser. Used after modifying parsing configuration to
+      apply updated rules retroactively.
+    related:
+      - parser
+      - document
+
+  - term: reintegrate
+    definition: >-
+      The action of re-triggering webhook delivery or third-party integration
+      pushes for previously parsed documents, without re-running parsing rules.
+    related:
+      - webhook
+      - reparse
+
+  - term: quota
+    definition: >-
+      The number of document processing credits available in a Docparser
+      account billing period. Each uploaded document consumes one quota unit.
+      Remaining quota is returned in upload responses.
+    related:
+      - billing
+      - plans
+
+  - term: format
+    definition: >-
+      A query parameter for results endpoints that controls the structure of
+      returned data. "object" (default, recommended) returns nested JSON;
+      "flat" returns a flat key-value mapping of all extracted fields.
+    related:
+      - parsed_result
+
+  - term: rate_limit
+    definition: >-
+      Per-minute request limits enforced on Docparser results endpoints.
+      Single-document results allow 60 requests/minute; parser-level (multi-
+      document) results allow 30 requests/minute.
+    related:
+      - results
+
+  - term: base_url
+    definition: >-
+      The root URL for Docparser API requests. v1 endpoints use
+      https://api.docparser.com/v1; select v2 endpoints (document fetch, status)
+      use https://api.docparser.com/v2.
+    related:
+      - api
+
+  - term: basic_auth
+    definition: >-
+      The recommended authentication method for the Docparser API using HTTP
+      Basic Authentication, where the API key is provided as the username and
+      the password field is left blank.
+    related:
+      - api_key
+
+  - term: api_key
+    definition: >-
+      The secret credential used to authenticate requests to the Docparser API.
+      Can be used via HTTP Basic Auth (as username), as a request header
+      (api_key), or as a URL query parameter.
+    related:
+      - basic_auth

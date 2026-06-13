@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/docparser/main/json-schema/docparser-parsed-result.json",
+  "title": "Docparser Parsed Result",
+  "description": "Parsed data result returned for a document processed by a Docparser parser. Core fields are defined; custom extracted fields vary per parser configuration.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the parsed document.",
+      "examples": ["doc_abc123"]
+    },
+    "file_name": {
+      "type": "string",
+      "description": "Original filename of the uploaded document.",
+      "examples": ["invoice.pdf"]
+    },
+    "remote_id": {
+      "type": "string",
+      "description": "Custom identifier assigned at upload time for tracking.",
+      "examples": ["order-9001"]
+    },
+    "media_link": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to view the document in the Docparser web application."
+    },
+    "page_count": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of pages in the document.",
+      "examples": [1]
+    },
+    "uploaded_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the document was uploaded."
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when parsing completed."
+    }
+  },
+  "additionalProperties": {
+    "description": "Custom fields extracted by the parser rules (e.g., invoice_number, vendor_name, total_amount)."
+  }
+}

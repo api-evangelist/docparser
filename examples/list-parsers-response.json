@@ -1,0 +1,14 @@
+[
+  {
+    "id": "abc123xyz",
+    "label": "Invoice Parser"
+  },
+  {
+    "id": "def456uvw",
+    "label": "Purchase Order Parser"
+  },
+  {
+    "id": "ghi789rst",
+    "label": "Bank Statement Parser"
+  }
+]

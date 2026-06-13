@@ -47,7 +47,7 @@ apis:
       - type: Documentation
         url: https://docparser.com/api/
       - type: OpenAPI
-        url: https://docparser.com/api/
+        url: https://raw.githubusercontent.com/api-evangelist/docparser/refs/heads/main/openapi/docparser-rest-api-openapi.yml
 common:
   - type: Website
     url: https://docparser.com

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/docparser/main/json-schema/docparser-parser.json",
+  "title": "Docparser Parser",
+  "description": "Represents a document parser configured in a Docparser account.",
+  "type": "object",
+  "required": ["id", "label"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the parser.",
+      "examples": ["abc123xyz"]
+    },
+    "label": {
+      "type": "string",
+      "description": "Human-readable name of the parser.",
+      "examples": ["Invoice Parser"]
+    }
+  },
+  "additionalProperties": false
+}

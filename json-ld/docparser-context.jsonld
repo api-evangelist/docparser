@@ -1,0 +1,115 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "docparser": "https://api.docparser.com/vocab/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Parser": "docparser:Parser",
+    "Document": "docparser:Document",
+    "ParsedResult": "docparser:ParsedResult",
+    "ParserModel": "docparser:ParserModel",
+
+    "id": "@id",
+    "label": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "parser_id": {
+      "@id": "docparser:parserId",
+      "@type": "xsd:string"
+    },
+    "document_id": {
+      "@id": "docparser:documentId",
+      "@type": "xsd:string"
+    },
+    "remote_id": {
+      "@id": "docparser:remoteId",
+      "@type": "xsd:string"
+    },
+    "file_name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "file_size": {
+      "@id": "schema:fileSize",
+      "@type": "xsd:integer"
+    },
+    "media_link": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "page_count": {
+      "@id": "schema:numberOfPages",
+      "@type": "xsd:integer"
+    },
+    "uploaded_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "processed_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "quota_used": {
+      "@id": "docparser:quotaUsed",
+      "@type": "xsd:integer"
+    },
+    "quota_left": {
+      "@id": "docparser:quotaLeft",
+      "@type": "xsd:integer"
+    },
+    "format": {
+      "@id": "docparser:resultFormat",
+      "@type": "xsd:string"
+    },
+    "limit": {
+      "@id": "docparser:limit",
+      "@type": "xsd:integer"
+    },
+    "sort_by": {
+      "@id": "docparser:sortBy",
+      "@type": "xsd:string"
+    },
+    "sort_order": {
+      "@id": "docparser:sortOrder",
+      "@type": "xsd:string"
+    },
+    "include_processing_queue": {
+      "@id": "docparser:includeProcessingQueue",
+      "@type": "xsd:boolean"
+    },
+    "msg": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "invoice_number": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "invoice_date": {
+      "@id": "schema:dateIssued",
+      "@type": "xsd:date"
+    },
+    "due_date": {
+      "@id": "schema:paymentDueDate",
+      "@type": "xsd:date"
+    },
+    "vendor_name": {
+      "@id": "schema:seller",
+      "@type": "xsd:string"
+    },
+    "total_amount": {
+      "@id": "schema:totalPaymentDue",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "schema:priceCurrency",
+      "@type": "xsd:string"
+    },
+    "line_items": {
+      "@id": "schema:itemListElement",
+      "@container": "@list"
+    }
+  }
+}
