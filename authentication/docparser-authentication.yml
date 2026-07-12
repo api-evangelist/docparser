@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/docparser-rest-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication. Use your API key as the username and leave the password
+    blank.
+  sources:
+  - openapi/docparser-rest-api-openapi.yml
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameter: api_key
+  description: API key passed as a custom request header.
+  sources:
+  - openapi/docparser-rest-api-openapi.yml
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: api_key
+  description: API key passed as a URL query parameter.
+  sources:
+  - openapi/docparser-rest-api-openapi.yml
