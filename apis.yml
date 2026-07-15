@@ -49,6 +49,8 @@ apis:
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/docparser/refs/heads/main/openapi/docparser-rest-api-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/docparser-agentic-access.yml
   - type: TrustCenter
     url: security/docparser-trust-center.yml
   - type: DomainSecurity
