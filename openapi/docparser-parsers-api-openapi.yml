@@ -1,0 +1,141 @@
+openapi: 3.0.3
+info:
+  title: Docparser REST Documents Parsers API
+  description: The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.
+  version: '1.0'
+  contact:
+    name: Docparser Support
+    url: https://docparser.com
+  termsOfService: https://docparser.com/terms/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.docparser.com/v1
+  description: Docparser API v1
+- url: https://api.docparser.com/v2
+  description: Docparser API v2 (selected endpoints)
+security:
+- basicAuth: []
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Parsers
+  description: Manage document parser configurations
+paths:
+  /parsers:
+    get:
+      operationId: listParsers
+      summary: List all parsers
+      description: Returns a list of all document parsers created in the authenticated account.
+      tags:
+      - Parsers
+      responses:
+        '200':
+          description: List of parsers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Parser'
+              example:
+              - id: abc123xyz
+                label: Invoice Parser
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /parser/models/{parserId}:
+    get:
+      operationId: getParserModels
+      summary: Get parser model layouts
+      description: Returns the list of model layouts configured for a specific parser.
+      tags:
+      - Parsers
+      parameters:
+      - $ref: '#/components/parameters/parserId'
+      responses:
+        '200':
+          description: List of model layouts for the parser
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParserModel'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found. Check parserId or documentId.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    parserId:
+      name: parserId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the document parser.
+      example: abc123xyz
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code or short identifier.
+        message:
+          type: string
+          description: Human-readable error description.
+    ParserModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Model layout identifier.
+        label:
+          type: string
+          description: Human-readable label for the model layout.
+        layout_type:
+          type: string
+          description: Type of layout (e.g., zonal, pattern).
+    Parser:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique parser identifier.
+          example: abc123xyz
+        label:
+          type: string
+          description: Human-readable name of the parser.
+          example: Invoice Parser
+      required:
+      - id
+      - label
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Use your API key as the username and leave the password blank.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api_key
+      description: API key passed as a custom request header.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: API key passed as a URL query parameter.

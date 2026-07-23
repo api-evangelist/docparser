@@ -1,0 +1,197 @@
+openapi: 3.0.3
+info:
+  title: Docparser REST Documents API
+  description: The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.
+  version: '1.0'
+  contact:
+    name: Docparser Support
+    url: https://docparser.com
+  termsOfService: https://docparser.com/terms/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.docparser.com/v1
+  description: Docparser API v1
+- url: https://api.docparser.com/v2
+  description: Docparser API v2 (selected endpoints)
+security:
+- basicAuth: []
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Documents
+  description: Upload and manage documents for parsing
+paths:
+  /document/upload/{parserId}:
+    post:
+      operationId: uploadDocument
+      summary: Upload a document by file
+      description: Uploads a document to the specified parser using multipart form data (file upload) or base64-encoded content. The document is queued for parsing immediately upon upload.
+      tags:
+      - Documents
+      parameters:
+      - $ref: '#/components/parameters/parserId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The document file to upload (PDF, DOCX, image).
+                file_name:
+                  type: string
+                  description: Optional filename override. If not provided, the original filename is used.
+                remote_id:
+                  type: string
+                  description: Optional custom identifier to associate with the document for tracking purposes.
+          application/json:
+            schema:
+              type: object
+              required:
+              - file_content
+              - file_name
+              properties:
+                file_content:
+                  type: string
+                  description: Base64-encoded file content.
+                file_name:
+                  type: string
+                  description: Filename including extension (e.g., invoice.pdf).
+                remote_id:
+                  type: string
+                  description: Optional custom identifier for tracking.
+      responses:
+        '200':
+          description: Document uploaded and queued for parsing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentUploadResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /document/reparse/{parserId}:
+    post:
+      operationId: reparseDocuments
+      summary: Reparse documents
+      description: Reschedules parsing for previously uploaded documents under the specified parser. Useful after updating parser rules.
+      tags:
+      - Documents
+      parameters:
+      - $ref: '#/components/parameters/parserId'
+      responses:
+        '200':
+          description: Reparse scheduled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /document/reintegrate/{parserId}:
+    post:
+      operationId: reintegrateDocuments
+      summary: Reintegrate documents
+      description: Reschedules integration (webhook delivery / third-party push) for previously parsed documents under the specified parser.
+      tags:
+      - Documents
+      parameters:
+      - $ref: '#/components/parameters/parserId'
+      responses:
+        '200':
+          description: Reintegration scheduled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          description: Confirmation message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code or short identifier.
+        message:
+          type: string
+          description: Human-readable error description.
+    DocumentUploadResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the uploaded document.
+          example: doc_abc123
+        file_size:
+          type: integer
+          description: Size of the uploaded file in bytes.
+        quota_used:
+          type: integer
+          description: Number of quota units consumed by this upload.
+        quota_left:
+          type: integer
+          description: Remaining quota units in the current billing period.
+  responses:
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found. Check parserId or documentId.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request. Check parameters and payload.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    parserId:
+      name: parserId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the document parser.
+      example: abc123xyz
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Use your API key as the username and leave the password blank.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api_key
+      description: API key passed as a custom request header.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: API key passed as a URL query parameter.

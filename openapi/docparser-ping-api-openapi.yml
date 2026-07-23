@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Docparser REST Documents Ping API
+  description: The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.
+  version: '1.0'
+  contact:
+    name: Docparser Support
+    url: https://docparser.com
+  termsOfService: https://docparser.com/terms/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.docparser.com/v1
+  description: Docparser API v1
+- url: https://api.docparser.com/v2
+  description: Docparser API v2 (selected endpoints)
+security:
+- basicAuth: []
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Ping
+  description: Health check and connectivity test
+paths:
+  /ping:
+    get:
+      operationId: ping
+      summary: Ping / health check
+      description: Tests API connectivity and authentication. Returns a success response if the API key is valid.
+      tags:
+      - Ping
+      responses:
+        '200':
+          description: Successful ping response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+              example:
+                msg: pong
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    PingResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: pong
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code or short identifier.
+        message:
+          type: string
+          description: Human-readable error description.
+  responses:
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Use your API key as the username and leave the password blank.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api_key
+      description: API key passed as a custom request header.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: API key passed as a URL query parameter.
