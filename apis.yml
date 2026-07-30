@@ -11,7 +11,20 @@ description: >-
   re-processing documents, along with webhook support for real-time data
   delivery and official SDKs for PHP, Node.js, and Salesforce Apex.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: open
+  trial: true
+  try_now: true
+  public: true
+  label: Paid (free trial) · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/docparser.png
 url: https://raw.githubusercontent.com/api-evangelist/docparser/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -26,29 +39,57 @@ tags:
   - Contracts
   - REST API
 apis:
-  - aid: docparser:docparser-rest-api
-    name: Docparser REST API
-    description: >-
-      The Docparser REST API provides programmatic access to document parsing
-      and data extraction capabilities. Developers can upload documents via file
-      upload, base64 encoding, or public URL fetch, retrieve parsed results for
-      individual or multiple documents, manage parser configurations, and trigger
-      re-parsing or re-integration operations. The API uses HTTP Basic Auth with
-      the API key as the username and enforces per-minute rate limits on result
-      retrieval endpoints.
-    humanURL: https://docparser.com/api/
-    baseURL: https://api.docparser.com/v1
-    tags:
-      - Document Parsing
-      - PDF Extraction
-      - OCR
-      - REST API
-    properties:
-      - type: Documentation
-        url: https://docparser.com/api/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/docparser/refs/heads/main/openapi/docparser-rest-api-openapi.yml
+- aid: docparser:docparser-documents-api
+  name: Docparser Documents API
+  description: Upload and manage documents for parsing
+  humanURL: https://docparser.com/api/
+  baseURL: https://api.docparser.com/v1
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/docparser-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docparser.com/api/
+- aid: docparser:docparser-parsers-api
+  name: Docparser Parsers API
+  description: Manage document parser configurations
+  humanURL: https://docparser.com/api/
+  baseURL: https://api.docparser.com/v1
+  tags:
+  - Parsers
+  properties:
+  - type: OpenAPI
+    url: openapi/docparser-parsers-api-openapi.yml
+  - type: Documentation
+    url: https://docparser.com/api/
+- aid: docparser:docparser-ping-api
+  name: Docparser Ping API
+  description: Health check and connectivity test
+  humanURL: https://docparser.com/api/
+  baseURL: https://api.docparser.com/v1
+  tags:
+  - Ping
+  properties:
+  - type: OpenAPI
+    url: openapi/docparser-ping-api-openapi.yml
+  - type: Documentation
+    url: https://docparser.com/api/
+- aid: docparser:docparser-results-api
+  name: Docparser Results API
+  description: Retrieve parsed data results
+  humanURL: https://docparser.com/api/
+  baseURL: https://api.docparser.com/v1
+  tags:
+  - Results
+  properties:
+  - type: OpenAPI
+    url: openapi/docparser-results-api-openapi.yml
+  - type: Documentation
+    url: https://docparser.com/api/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/docparser/overview
   - type: AgenticAccess
     url: agentic-access/docparser-agentic-access.yml
   - type: TrustCenter
