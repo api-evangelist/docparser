@@ -1,0 +1,20 @@
+{
+  "provider": "docparser",
+  "sources": [
+    "docparser-documents-api-openapi.yml",
+    "docparser-parsers-api-openapi.yml",
+    "docparser-ping-api-openapi.yml",
+    "docparser-results-api-openapi.yml"
+  ],
+  "outputs": [
+    "docparser-documents-api-openapi.yml",
+    "docparser-parsers-api-openapi.yml",
+    "docparser-ping-api-openapi.yml",
+    "docparser-results-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

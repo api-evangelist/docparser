@@ -1,0 +1,704 @@
+{
+  "info": {
+    "_postman_id": "f149bcb2-b0f4-42b7-8945-2365d77dcc0c",
+    "name": "Docparser REST Documents Results API",
+    "description": "The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.\n\nContact Support:\n Name: Docparser Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:31:33.000Z",
+    "updatedAt": "2026-07-28T01:31:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f149bcb2-b0f4-42b7-8945-2365d77dcc0c"
+  },
+  "item": [
+    {
+      "name": "results",
+      "item": [
+        {
+          "name": "{parserId}",
+          "item": [
+            {
+              "name": "{documentId}",
+              "item": [
+                {
+                  "name": "Get results for a single document",
+                  "id": "fa88f69e-5f7c-4287-97bc-48375385b3c5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/results/:parserId/:documentId?format=object",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "results",
+                        ":parserId",
+                        ":documentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map.",
+                          "key": "format",
+                          "value": "object"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "3a0e9ebe-0e7b-45a5-95c4-cadd6c5d467f",
+                          "key": "parserId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the document parser."
+                        },
+                        {
+                          "id": "1e576b1e-8ee4-4811-8927-101005bada4d",
+                          "key": "documentId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the document."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the parsed data for a specific document. Rate limited to 60 calls per minute."
+                  },
+                  "response": [
+                    {
+                      "id": "e30865d4-2712-4c39-aada-2b85778fbf0e",
+                      "name": "Parsed results for the document",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/results/:parserId/:documentId?format=object",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "results",
+                            ":parserId",
+                            ":documentId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map.",
+                              "key": "format",
+                              "value": "object"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            },
+                            {
+                              "key": "documentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"file_name\": \"<string>\",\n  \"remote_id\": \"<string>\",\n  \"media_link\": \"<uri>\",\n  \"page_count\": \"<integer>\",\n  \"uploaded_at\": \"<dateTime>\",\n  \"processed_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T01:31:34.000Z",
+                      "updatedAt": "2026-07-28T01:31:34.000Z",
+                      "uid": "35240-e30865d4-2712-4c39-aada-2b85778fbf0e"
+                    },
+                    {
+                      "id": "ef5b2151-de11-474e-acc2-c21001f3f167",
+                      "name": "Authentication failed. Check your API key.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/results/:parserId/:documentId?format=object",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "results",
+                            ":parserId",
+                            ":documentId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map.",
+                              "key": "format",
+                              "value": "object"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            },
+                            {
+                              "key": "documentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:34.000Z",
+                      "updatedAt": "2026-07-28T01:31:34.000Z",
+                      "uid": "35240-ef5b2151-de11-474e-acc2-c21001f3f167"
+                    },
+                    {
+                      "id": "f5b3404f-02c0-47a7-bb30-1c1065e08dff",
+                      "name": "Resource not found. Check parserId or documentId.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/results/:parserId/:documentId?format=object",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "results",
+                            ":parserId",
+                            ":documentId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map.",
+                              "key": "format",
+                              "value": "object"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            },
+                            {
+                              "key": "documentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:34.000Z",
+                      "updatedAt": "2026-07-28T01:31:34.000Z",
+                      "uid": "35240-f5b3404f-02c0-47a7-bb30-1c1065e08dff"
+                    },
+                    {
+                      "id": "6e7e4130-fe4b-49a8-ab94-9300461ef41a",
+                      "name": "Rate limit exceeded. Results endpoints allow 60 req/min (single document) or 30 req/min (parser-level).",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/results/:parserId/:documentId?format=object",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "results",
+                            ":parserId",
+                            ":documentId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map.",
+                              "key": "format",
+                              "value": "object"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            },
+                            {
+                              "key": "documentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:34.000Z",
+                      "updatedAt": "2026-07-28T01:31:34.000Z",
+                      "uid": "35240-6e7e4130-fe4b-49a8-ab94-9300461ef41a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:31:34.000Z",
+                  "updatedAt": "2026-07-28T01:31:34.000Z",
+                  "uid": "35240-fa88f69e-5f7c-4287-97bc-48375385b3c5"
+                }
+              ],
+              "id": "a03950a5-183f-4c36-a212-558aefe34c65",
+              "createdAt": "2026-07-28T01:31:34.000Z",
+              "updatedAt": "2026-07-28T01:31:34.000Z",
+              "uid": "35240-a03950a5-183f-4c36-a212-558aefe34c65"
+            },
+            {
+              "name": "Get results for all documents in a parser",
+              "id": "8e2a6ee1-3ed0-4144-ae0e-1d6a15f1043e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/results/:parserId?format=object&list=last_processed&limit=100&date=<dateTime>&remote_id=<string>&include_processing_queue=false&sort_by=uploaded_at&sort_order=desc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "results",
+                    ":parserId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map.",
+                      "key": "format",
+                      "value": "object"
+                    },
+                    {
+                      "description": "Filter documents by list type.",
+                      "key": "list",
+                      "value": "last_processed"
+                    },
+                    {
+                      "description": "Maximum number of results to return.",
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Filter results to documents processed after this date (ISO 8601).",
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter results by remote_id assigned at upload.",
+                      "key": "remote_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Include documents still in the processing queue.",
+                      "key": "include_processing_queue",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Field to sort results by.",
+                      "key": "sort_by",
+                      "value": "uploaded_at"
+                    },
+                    {
+                      "description": "Sort order for results.",
+                      "key": "sort_order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "babf832c-be0e-42d6-b72b-e3019898bd02",
+                      "key": "parserId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the document parser."
+                    }
+                  ]
+                },
+                "description": "Retrieves parsed data for multiple documents belonging to the specified parser. Supports filtering, sorting, and pagination. Rate limited to 30 calls per minute."
+              },
+              "response": [
+                {
+                  "id": "22448367-4a3a-4a34-91ba-fdd9affaf52b",
+                  "name": "Array of parsed results",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/results/:parserId?format=object&list=last_processed&limit=100&date=<dateTime>&remote_id=<string>&include_processing_queue=false&sort_by=uploaded_at&sort_order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "results",
+                        ":parserId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map.",
+                          "key": "format",
+                          "value": "object"
+                        },
+                        {
+                          "description": "Filter documents by list type.",
+                          "key": "list",
+                          "value": "last_processed"
+                        },
+                        {
+                          "description": "Maximum number of results to return.",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Filter results to documents processed after this date (ISO 8601).",
+                          "key": "date",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter results by remote_id assigned at upload.",
+                          "key": "remote_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Include documents still in the processing queue.",
+                          "key": "include_processing_queue",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Field to sort results by.",
+                          "key": "sort_by",
+                          "value": "uploaded_at"
+                        },
+                        {
+                          "description": "Sort order for results.",
+                          "key": "sort_order",
+                          "value": "desc"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "parserId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<string>\",\n    \"file_name\": \"<string>\",\n    \"remote_id\": \"<string>\",\n    \"media_link\": \"<uri>\",\n    \"page_count\": \"<integer>\",\n    \"uploaded_at\": \"<dateTime>\",\n    \"processed_at\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"file_name\": \"<string>\",\n    \"remote_id\": \"<string>\",\n    \"media_link\": \"<uri>\",\n    \"page_count\": \"<integer>\",\n    \"uploaded_at\": \"<dateTime>\",\n    \"processed_at\": \"<dateTime>\"\n  }\n]",
+                  "createdAt": "2026-07-28T01:31:34.000Z",
+                  "updatedAt": "2026-07-28T01:31:34.000Z",
+                  "uid": "35240-22448367-4a3a-4a34-91ba-fdd9affaf52b"
+                },
+                {
+                  "id": "7447239e-05e1-41b8-a9bc-1d73b638937d",
+                  "name": "Authentication failed. Check your API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/results/:parserId?format=object&list=last_processed&limit=100&date=<dateTime>&remote_id=<string>&include_processing_queue=false&sort_by=uploaded_at&sort_order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "results",
+                        ":parserId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map.",
+                          "key": "format",
+                          "value": "object"
+                        },
+                        {
+                          "description": "Filter documents by list type.",
+                          "key": "list",
+                          "value": "last_processed"
+                        },
+                        {
+                          "description": "Maximum number of results to return.",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Filter results to documents processed after this date (ISO 8601).",
+                          "key": "date",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter results by remote_id assigned at upload.",
+                          "key": "remote_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Include documents still in the processing queue.",
+                          "key": "include_processing_queue",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Field to sort results by.",
+                          "key": "sort_by",
+                          "value": "uploaded_at"
+                        },
+                        {
+                          "description": "Sort order for results.",
+                          "key": "sort_order",
+                          "value": "desc"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "parserId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:31:34.000Z",
+                  "updatedAt": "2026-07-28T01:31:34.000Z",
+                  "uid": "35240-7447239e-05e1-41b8-a9bc-1d73b638937d"
+                },
+                {
+                  "id": "d99d8dd5-cbf3-4b97-a999-5cf0517e8a0e",
+                  "name": "Rate limit exceeded. Results endpoints allow 60 req/min (single document) or 30 req/min (parser-level).",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/results/:parserId?format=object&list=last_processed&limit=100&date=<dateTime>&remote_id=<string>&include_processing_queue=false&sort_by=uploaded_at&sort_order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "results",
+                        ":parserId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map.",
+                          "key": "format",
+                          "value": "object"
+                        },
+                        {
+                          "description": "Filter documents by list type.",
+                          "key": "list",
+                          "value": "last_processed"
+                        },
+                        {
+                          "description": "Maximum number of results to return.",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Filter results to documents processed after this date (ISO 8601).",
+                          "key": "date",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter results by remote_id assigned at upload.",
+                          "key": "remote_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Include documents still in the processing queue.",
+                          "key": "include_processing_queue",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Field to sort results by.",
+                          "key": "sort_by",
+                          "value": "uploaded_at"
+                        },
+                        {
+                          "description": "Sort order for results.",
+                          "key": "sort_order",
+                          "value": "desc"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "parserId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:31:34.000Z",
+                  "updatedAt": "2026-07-28T01:31:34.000Z",
+                  "uid": "35240-d99d8dd5-cbf3-4b97-a999-5cf0517e8a0e"
+                }
+              ],
+              "createdAt": "2026-07-28T01:31:34.000Z",
+              "updatedAt": "2026-07-28T01:31:34.000Z",
+              "uid": "35240-8e2a6ee1-3ed0-4144-ae0e-1d6a15f1043e"
+            }
+          ],
+          "id": "3798e421-f57e-4db8-9793-af4fc67fa99c",
+          "createdAt": "2026-07-28T01:31:34.000Z",
+          "updatedAt": "2026-07-28T01:31:34.000Z",
+          "uid": "35240-3798e421-f57e-4db8-9793-af4fc67fa99c"
+        }
+      ],
+      "id": "f6e6e8ef-fadb-459a-9d5e-7c39aec1d2d9",
+      "createdAt": "2026-07-28T01:31:34.000Z",
+      "updatedAt": "2026-07-28T01:31:34.000Z",
+      "uid": "35240-f6e6e8ef-fadb-459a-9d5e-7c39aec1d2d9"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.docparser.com/v1"
+    }
+  ]
+}

@@ -1,0 +1,842 @@
+{
+  "info": {
+    "_postman_id": "7aac7ffa-5d37-40b7-9429-694a8299143b",
+    "name": "Docparser REST Documents API",
+    "description": "The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.\n\nContact Support:\n Name: Docparser Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:31:30.000Z",
+    "updatedAt": "2026-07-28T01:31:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7aac7ffa-5d37-40b7-9429-694a8299143b"
+  },
+  "item": [
+    {
+      "name": "document",
+      "item": [
+        {
+          "name": "upload",
+          "item": [
+            {
+              "name": "{parserId}",
+              "item": [
+                {
+                  "name": "Upload a document by file",
+                  "id": "1fb442e1-3bc9-4cba-acba-baa1fc2114fe",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The document file to upload (PDF, DOCX, image).",
+                          "key": "file",
+                          "type": "file",
+                          "value": null
+                        },
+                        {
+                          "description": "Optional filename override. If not provided, the original filename is used.",
+                          "key": "file_name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "Optional custom identifier to associate with the document for tracking purposes.",
+                          "key": "remote_id",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/document/upload/:parserId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "document",
+                        "upload",
+                        ":parserId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1fdaea94-d5dc-47dc-ab19-a48e76185e57",
+                          "key": "parserId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the document parser."
+                        }
+                      ]
+                    },
+                    "description": "Uploads a document to the specified parser using multipart form data (file upload) or base64-encoded content. The document is queued for parsing immediately upon upload."
+                  },
+                  "response": [
+                    {
+                      "id": "af0cbd08-3bd6-4515-837c-47c5e022b947",
+                      "name": "Document uploaded and queued for parsing",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The document file to upload (PDF, DOCX, image).",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "Optional filename override. If not provided, the original filename is used.",
+                              "key": "file_name",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Optional custom identifier to associate with the document for tracking purposes.",
+                              "key": "remote_id",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/document/upload/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "upload",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"file_size\": \"<integer>\",\n  \"quota_used\": \"<integer>\",\n  \"quota_left\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-af0cbd08-3bd6-4515-837c-47c5e022b947"
+                    },
+                    {
+                      "id": "a5984646-71a0-4454-90fc-caf1ca798438",
+                      "name": "Bad request. Check parameters and payload.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The document file to upload (PDF, DOCX, image).",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "Optional filename override. If not provided, the original filename is used.",
+                              "key": "file_name",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Optional custom identifier to associate with the document for tracking purposes.",
+                              "key": "remote_id",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/document/upload/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "upload",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-a5984646-71a0-4454-90fc-caf1ca798438"
+                    },
+                    {
+                      "id": "9b72a463-067a-49ea-8a78-5a802a11e547",
+                      "name": "Authentication failed. Check your API key.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The document file to upload (PDF, DOCX, image).",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "Optional filename override. If not provided, the original filename is used.",
+                              "key": "file_name",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Optional custom identifier to associate with the document for tracking purposes.",
+                              "key": "remote_id",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/document/upload/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "upload",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-9b72a463-067a-49ea-8a78-5a802a11e547"
+                    },
+                    {
+                      "id": "f4b13cd9-2be8-4b62-ba67-c374ee811b5d",
+                      "name": "Resource not found. Check parserId or documentId.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The document file to upload (PDF, DOCX, image).",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "Optional filename override. If not provided, the original filename is used.",
+                              "key": "file_name",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Optional custom identifier to associate with the document for tracking purposes.",
+                              "key": "remote_id",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/document/upload/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "upload",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-f4b13cd9-2be8-4b62-ba67-c374ee811b5d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:31:31.000Z",
+                  "updatedAt": "2026-07-28T01:31:31.000Z",
+                  "uid": "35240-1fb442e1-3bc9-4cba-acba-baa1fc2114fe"
+                }
+              ],
+              "id": "709a72b0-3be4-4072-b568-9a6541389a80",
+              "createdAt": "2026-07-28T01:31:31.000Z",
+              "updatedAt": "2026-07-28T01:31:31.000Z",
+              "uid": "35240-709a72b0-3be4-4072-b568-9a6541389a80"
+            }
+          ],
+          "id": "31fd03ce-5850-41f6-bdb1-2fceafc44d1a",
+          "createdAt": "2026-07-28T01:31:31.000Z",
+          "updatedAt": "2026-07-28T01:31:31.000Z",
+          "uid": "35240-31fd03ce-5850-41f6-bdb1-2fceafc44d1a"
+        },
+        {
+          "name": "reparse",
+          "item": [
+            {
+              "name": "{parserId}",
+              "item": [
+                {
+                  "name": "Reparse documents",
+                  "id": "2908336d-a9c3-4662-add0-0b1362ce960b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/document/reparse/:parserId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "document",
+                        "reparse",
+                        ":parserId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9b9ab981-f7c0-4be6-a7c1-e55f6d2e6064",
+                          "key": "parserId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the document parser."
+                        }
+                      ]
+                    },
+                    "description": "Reschedules parsing for previously uploaded documents under the specified parser. Useful after updating parser rules."
+                  },
+                  "response": [
+                    {
+                      "id": "b49c5948-94c6-4016-a0ee-deff61f39aca",
+                      "name": "Reparse scheduled successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/document/reparse/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "reparse",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"msg\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-b49c5948-94c6-4016-a0ee-deff61f39aca"
+                    },
+                    {
+                      "id": "8a2e9dfe-9aaa-4d97-9ea2-8df5096ec750",
+                      "name": "Authentication failed. Check your API key.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/document/reparse/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "reparse",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-8a2e9dfe-9aaa-4d97-9ea2-8df5096ec750"
+                    },
+                    {
+                      "id": "ef792bca-f296-4688-a12a-9cb129ee2122",
+                      "name": "Resource not found. Check parserId or documentId.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/document/reparse/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "reparse",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-ef792bca-f296-4688-a12a-9cb129ee2122"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:31:31.000Z",
+                  "updatedAt": "2026-07-28T01:31:31.000Z",
+                  "uid": "35240-2908336d-a9c3-4662-add0-0b1362ce960b"
+                }
+              ],
+              "id": "6eb0a867-76fc-48f3-935f-7a93f56517bd",
+              "createdAt": "2026-07-28T01:31:31.000Z",
+              "updatedAt": "2026-07-28T01:31:31.000Z",
+              "uid": "35240-6eb0a867-76fc-48f3-935f-7a93f56517bd"
+            }
+          ],
+          "id": "eba540f5-8fca-44bd-8dbb-ac8e1b3063ac",
+          "createdAt": "2026-07-28T01:31:31.000Z",
+          "updatedAt": "2026-07-28T01:31:31.000Z",
+          "uid": "35240-eba540f5-8fca-44bd-8dbb-ac8e1b3063ac"
+        },
+        {
+          "name": "reintegrate",
+          "item": [
+            {
+              "name": "{parserId}",
+              "item": [
+                {
+                  "name": "Reintegrate documents",
+                  "id": "d01a91a6-c52c-4945-afe2-692d57926a88",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/document/reintegrate/:parserId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "document",
+                        "reintegrate",
+                        ":parserId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fc968e7f-bfc2-430d-90c3-f3359a8301ef",
+                          "key": "parserId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the document parser."
+                        }
+                      ]
+                    },
+                    "description": "Reschedules integration (webhook delivery / third-party push) for previously parsed documents under the specified parser."
+                  },
+                  "response": [
+                    {
+                      "id": "5bc66b84-caa6-43c0-ac98-0f257091fdac",
+                      "name": "Reintegration scheduled successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/document/reintegrate/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "reintegrate",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"msg\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-5bc66b84-caa6-43c0-ac98-0f257091fdac"
+                    },
+                    {
+                      "id": "002e4cc3-4cd3-4532-8444-5d9bb4e6ed04",
+                      "name": "Authentication failed. Check your API key.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/document/reintegrate/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "reintegrate",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-002e4cc3-4cd3-4532-8444-5d9bb4e6ed04"
+                    },
+                    {
+                      "id": "c696c077-8a85-4463-955a-84f8a4b037ee",
+                      "name": "Resource not found. Check parserId or documentId.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/document/reintegrate/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "document",
+                            "reintegrate",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:31.000Z",
+                      "updatedAt": "2026-07-28T01:31:31.000Z",
+                      "uid": "35240-c696c077-8a85-4463-955a-84f8a4b037ee"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:31:31.000Z",
+                  "updatedAt": "2026-07-28T01:31:31.000Z",
+                  "uid": "35240-d01a91a6-c52c-4945-afe2-692d57926a88"
+                }
+              ],
+              "id": "3a4f67b2-2271-4081-963e-eda3026dc64c",
+              "createdAt": "2026-07-28T01:31:31.000Z",
+              "updatedAt": "2026-07-28T01:31:31.000Z",
+              "uid": "35240-3a4f67b2-2271-4081-963e-eda3026dc64c"
+            }
+          ],
+          "id": "1b287af3-5c85-494e-8002-891669cf8046",
+          "createdAt": "2026-07-28T01:31:31.000Z",
+          "updatedAt": "2026-07-28T01:31:31.000Z",
+          "uid": "35240-1b287af3-5c85-494e-8002-891669cf8046"
+        }
+      ],
+      "id": "a1440b40-f975-40a6-8a4f-7cb8ceec1a6f",
+      "createdAt": "2026-07-28T01:31:31.000Z",
+      "updatedAt": "2026-07-28T01:31:31.000Z",
+      "uid": "35240-a1440b40-f975-40a6-8a4f-7cb8ceec1a6f"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.docparser.com/v1"
+    }
+  ]
+}

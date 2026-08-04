@@ -1,0 +1,159 @@
+{
+  "info": {
+    "_postman_id": "366901ff-4893-4246-9168-23cdf3a36303",
+    "name": "Docparser REST Documents Ping API",
+    "description": "The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.\n\nContact Support:\n Name: Docparser Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:31:32.000Z",
+    "updatedAt": "2026-07-28T01:31:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-366901ff-4893-4246-9168-23cdf3a36303"
+  },
+  "item": [
+    {
+      "name": "ping",
+      "item": [
+        {
+          "name": "Ping / health check",
+          "id": "cc8e4c23-ea5e-4275-bb6b-8a70bdd93430",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ping"
+              ]
+            },
+            "description": "Tests API connectivity and authentication. Returns a success response if the API key is valid."
+          },
+          "response": [
+            {
+              "id": "c6f279e6-0eda-4a84-97f6-fd388e815388",
+              "name": "Successful ping response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ping",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"msg\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:31:33.000Z",
+              "updatedAt": "2026-07-28T01:31:33.000Z",
+              "uid": "35240-c6f279e6-0eda-4a84-97f6-fd388e815388"
+            },
+            {
+              "id": "d1b91276-c53b-4c2b-8bff-527fe6a68441",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ping",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:31:33.000Z",
+              "updatedAt": "2026-07-28T01:31:33.000Z",
+              "uid": "35240-d1b91276-c53b-4c2b-8bff-527fe6a68441"
+            }
+          ],
+          "createdAt": "2026-07-28T01:31:33.000Z",
+          "updatedAt": "2026-07-28T01:31:33.000Z",
+          "uid": "35240-cc8e4c23-ea5e-4275-bb6b-8a70bdd93430"
+        }
+      ],
+      "id": "4e7c57ad-72a0-4b03-a840-c84268f1812c",
+      "createdAt": "2026-07-28T01:31:33.000Z",
+      "updatedAt": "2026-07-28T01:31:33.000Z",
+      "uid": "35240-4e7c57ad-72a0-4b03-a840-c84268f1812c"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.docparser.com/v1"
+    }
+  ]
+}

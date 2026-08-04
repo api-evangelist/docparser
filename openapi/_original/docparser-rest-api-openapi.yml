@@ -1,0 +1,495 @@
+openapi: 3.0.3
+info:
+  title: Docparser REST API
+  description: >-
+    The Docparser REST API provides programmatic access to document parsing and
+    data extraction capabilities. Developers can upload documents via file
+    upload, base64 encoding, or public URL fetch, retrieve parsed results for
+    individual or multiple documents, manage parser configurations, and trigger
+    re-parsing or re-integration operations. The API uses HTTP Basic Auth with
+    the API key as the username and enforces per-minute rate limits on result
+    retrieval endpoints.
+  version: '1.0'
+  contact:
+    name: Docparser Support
+    url: https://docparser.com
+  termsOfService: https://docparser.com/terms/
+  license:
+    name: Proprietary
+servers:
+  - url: https://api.docparser.com/v1
+    description: Docparser API v1
+  - url: https://api.docparser.com/v2
+    description: Docparser API v2 (selected endpoints)
+security:
+  - basicAuth: []
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+tags:
+  - name: Ping
+    description: Health check and connectivity test
+  - name: Parsers
+    description: Manage document parser configurations
+  - name: Documents
+    description: Upload and manage documents for parsing
+  - name: Results
+    description: Retrieve parsed data results
+paths:
+  /ping:
+    get:
+      operationId: ping
+      summary: Ping / health check
+      description: >-
+        Tests API connectivity and authentication. Returns a success response if
+        the API key is valid.
+      tags:
+        - Ping
+      responses:
+        '200':
+          description: Successful ping response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+              example:
+                msg: pong
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /parsers:
+    get:
+      operationId: listParsers
+      summary: List all parsers
+      description: Returns a list of all document parsers created in the authenticated account.
+      tags:
+        - Parsers
+      responses:
+        '200':
+          description: List of parsers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Parser'
+              example:
+                - id: abc123xyz
+                  label: Invoice Parser
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /parser/models/{parserId}:
+    get:
+      operationId: getParserModels
+      summary: Get parser model layouts
+      description: Returns the list of model layouts configured for a specific parser.
+      tags:
+        - Parsers
+      parameters:
+        - $ref: '#/components/parameters/parserId'
+      responses:
+        '200':
+          description: List of model layouts for the parser
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParserModel'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /document/upload/{parserId}:
+    post:
+      operationId: uploadDocument
+      summary: Upload a document by file
+      description: >-
+        Uploads a document to the specified parser using multipart form data
+        (file upload) or base64-encoded content. The document is queued for
+        parsing immediately upon upload.
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/parserId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The document file to upload (PDF, DOCX, image).
+                file_name:
+                  type: string
+                  description: >-
+                    Optional filename override. If not provided, the original
+                    filename is used.
+                remote_id:
+                  type: string
+                  description: >-
+                    Optional custom identifier to associate with the document for
+                    tracking purposes.
+          application/json:
+            schema:
+              type: object
+              required:
+                - file_content
+                - file_name
+              properties:
+                file_content:
+                  type: string
+                  description: Base64-encoded file content.
+                file_name:
+                  type: string
+                  description: Filename including extension (e.g., invoice.pdf).
+                remote_id:
+                  type: string
+                  description: Optional custom identifier for tracking.
+      responses:
+        '200':
+          description: Document uploaded and queued for parsing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentUploadResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /document/reparse/{parserId}:
+    post:
+      operationId: reparseDocuments
+      summary: Reparse documents
+      description: >-
+        Reschedules parsing for previously uploaded documents under the
+        specified parser. Useful after updating parser rules.
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/parserId'
+      responses:
+        '200':
+          description: Reparse scheduled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /document/reintegrate/{parserId}:
+    post:
+      operationId: reintegrateDocuments
+      summary: Reintegrate documents
+      description: >-
+        Reschedules integration (webhook delivery / third-party push) for
+        previously parsed documents under the specified parser.
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/parserId'
+      responses:
+        '200':
+          description: Reintegration scheduled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /results/{parserId}/{documentId}:
+    get:
+      operationId: getResultsByDocument
+      summary: Get results for a single document
+      description: >-
+        Retrieves the parsed data for a specific document. Rate limited to 60
+        calls per minute.
+      tags:
+        - Results
+      parameters:
+        - $ref: '#/components/parameters/parserId'
+        - $ref: '#/components/parameters/documentId'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: Parsed results for the document
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParsedResult'
+              example:
+                id: doc_abc123
+                file_name: invoice.pdf
+                remote_id: ''
+                media_link: https://app.docparser.com/...
+                page_count: 1
+                uploaded_at: '2026-06-13T00:00:00Z'
+                processed_at: '2026-06-13T00:00:05Z'
+                invoice_number: INV-2026-001
+                total_amount: '1500.00'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /results/{parserId}:
+    get:
+      operationId: getResultsByParser
+      summary: Get results for all documents in a parser
+      description: >-
+        Retrieves parsed data for multiple documents belonging to the specified
+        parser. Supports filtering, sorting, and pagination. Rate limited to 30
+        calls per minute.
+      tags:
+        - Results
+      parameters:
+        - $ref: '#/components/parameters/parserId'
+        - $ref: '#/components/parameters/format'
+        - name: list
+          in: query
+          schema:
+            type: string
+            enum:
+              - last_uploaded
+              - last_processed
+          description: Filter documents by list type.
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+            default: 100
+          description: Maximum number of results to return.
+        - name: date
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: Filter results to documents processed after this date (ISO 8601).
+        - name: remote_id
+          in: query
+          schema:
+            type: string
+          description: Filter results by remote_id assigned at upload.
+        - name: include_processing_queue
+          in: query
+          schema:
+            type: boolean
+            default: false
+          description: Include documents still in the processing queue.
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            enum:
+              - uploaded_at
+              - processed_at
+          description: Field to sort results by.
+        - name: sort_order
+          in: query
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+          description: Sort order for results.
+      responses:
+        '200':
+          description: Array of parsed results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParsedResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic Authentication. Use your API key as the username and leave
+        the password blank.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api_key
+      description: API key passed as a custom request header.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: API key passed as a URL query parameter.
+  parameters:
+    parserId:
+      name: parserId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the document parser.
+      example: abc123xyz
+    documentId:
+      name: documentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the document.
+      example: doc_abc123
+    format:
+      name: format
+      in: query
+      schema:
+        type: string
+        enum:
+          - object
+          - flat
+        default: object
+      description: >-
+        Output format for parsed results. "object" (recommended) returns
+        structured JSON; "flat" returns a flat key-value map.
+  schemas:
+    PingResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: pong
+    Parser:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique parser identifier.
+          example: abc123xyz
+        label:
+          type: string
+          description: Human-readable name of the parser.
+          example: Invoice Parser
+      required:
+        - id
+        - label
+    ParserModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Model layout identifier.
+        label:
+          type: string
+          description: Human-readable label for the model layout.
+        layout_type:
+          type: string
+          description: Type of layout (e.g., zonal, pattern).
+    DocumentUploadResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the uploaded document.
+          example: doc_abc123
+        file_size:
+          type: integer
+          description: Size of the uploaded file in bytes.
+        quota_used:
+          type: integer
+          description: Number of quota units consumed by this upload.
+        quota_left:
+          type: integer
+          description: Remaining quota units in the current billing period.
+    ParsedResult:
+      type: object
+      description: >-
+        A parsed document result. The exact fields depend on the parser
+        configuration. Common fields are listed; custom extracted fields are
+        appended dynamically.
+      properties:
+        id:
+          type: string
+          description: Unique document identifier.
+          example: doc_abc123
+        file_name:
+          type: string
+          description: Original filename of the uploaded document.
+          example: invoice.pdf
+        remote_id:
+          type: string
+          description: Custom identifier assigned at upload.
+          example: ''
+        media_link:
+          type: string
+          format: uri
+          description: URL to view the document in the Docparser web app.
+        page_count:
+          type: integer
+          description: Number of pages in the document.
+          example: 1
+        uploaded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the document was uploaded.
+        processed_at:
+          type: string
+          format: date-time
+          description: Timestamp when parsing was completed.
+      additionalProperties:
+        description: Custom fields extracted by parser rules (e.g., invoice_number, total_amount).
+    SuccessResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          description: Confirmation message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code or short identifier.
+        message:
+          type: string
+          description: Human-readable error description.
+  responses:
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request. Check parameters and payload.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found. Check parserId or documentId.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: >-
+        Rate limit exceeded. Results endpoints allow 60 req/min (single
+        document) or 30 req/min (parser-level).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

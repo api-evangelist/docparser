@@ -1,0 +1,374 @@
+{
+  "info": {
+    "_postman_id": "91868cef-abd1-4749-8a48-145d33ca86bc",
+    "name": "Docparser REST Documents Parsers API",
+    "description": "The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.\n\nContact Support:\n Name: Docparser Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:31:31.000Z",
+    "updatedAt": "2026-07-28T01:31:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-91868cef-abd1-4749-8a48-145d33ca86bc"
+  },
+  "item": [
+    {
+      "name": "parsers",
+      "item": [
+        {
+          "name": "List all parsers",
+          "id": "0f5eae7c-b398-404c-9bf0-4ab9393be9d6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/parsers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "parsers"
+              ]
+            },
+            "description": "Returns a list of all document parsers created in the authenticated account."
+          },
+          "response": [
+            {
+              "id": "fc865903-5b62-45c0-af96-04bc9bb70954",
+              "name": "List of parsers",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/parsers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "parsers"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"label\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"label\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:31:32.000Z",
+              "updatedAt": "2026-07-28T01:31:32.000Z",
+              "uid": "35240-fc865903-5b62-45c0-af96-04bc9bb70954"
+            },
+            {
+              "id": "2fe8d7ec-f681-455e-99ad-06f32725e3f8",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/parsers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "parsers"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:31:32.000Z",
+              "updatedAt": "2026-07-28T01:31:32.000Z",
+              "uid": "35240-2fe8d7ec-f681-455e-99ad-06f32725e3f8"
+            }
+          ],
+          "createdAt": "2026-07-28T01:31:32.000Z",
+          "updatedAt": "2026-07-28T01:31:32.000Z",
+          "uid": "35240-0f5eae7c-b398-404c-9bf0-4ab9393be9d6"
+        }
+      ],
+      "id": "086766dc-395b-4c99-bf0e-b5f665b1a416",
+      "createdAt": "2026-07-28T01:31:32.000Z",
+      "updatedAt": "2026-07-28T01:31:32.000Z",
+      "uid": "35240-086766dc-395b-4c99-bf0e-b5f665b1a416"
+    },
+    {
+      "name": "parser",
+      "item": [
+        {
+          "name": "models",
+          "item": [
+            {
+              "name": "{parserId}",
+              "item": [
+                {
+                  "name": "Get parser model layouts",
+                  "id": "cbe64f8c-b3e5-4e52-9f47-7fa06a235971",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/parser/models/:parserId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "parser",
+                        "models",
+                        ":parserId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ce91b6e1-1913-4545-8ca6-dcc89c49ee12",
+                          "key": "parserId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the document parser."
+                        }
+                      ]
+                    },
+                    "description": "Returns the list of model layouts configured for a specific parser."
+                  },
+                  "response": [
+                    {
+                      "id": "881576be-96bd-4837-9962-b6a6d45bce12",
+                      "name": "List of model layouts for the parser",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/parser/models/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parser",
+                            "models",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"layout_type\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"layout_type\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:31:32.000Z",
+                      "updatedAt": "2026-07-28T01:31:32.000Z",
+                      "uid": "35240-881576be-96bd-4837-9962-b6a6d45bce12"
+                    },
+                    {
+                      "id": "7732c907-9188-4cc9-9892-15d62b17ed2e",
+                      "name": "Authentication failed. Check your API key.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/parser/models/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parser",
+                            "models",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:32.000Z",
+                      "updatedAt": "2026-07-28T01:31:32.000Z",
+                      "uid": "35240-7732c907-9188-4cc9-9892-15d62b17ed2e"
+                    },
+                    {
+                      "id": "a6ffaeee-f312-4df8-b9db-23f576ee6a57",
+                      "name": "Resource not found. Check parserId or documentId.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/parser/models/:parserId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parser",
+                            "models",
+                            ":parserId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parserId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:31:32.000Z",
+                      "updatedAt": "2026-07-28T01:31:32.000Z",
+                      "uid": "35240-a6ffaeee-f312-4df8-b9db-23f576ee6a57"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:31:32.000Z",
+                  "updatedAt": "2026-07-28T01:31:32.000Z",
+                  "uid": "35240-cbe64f8c-b3e5-4e52-9f47-7fa06a235971"
+                }
+              ],
+              "id": "85c7cf54-07e2-4eb4-b782-ee74df65ed16",
+              "createdAt": "2026-07-28T01:31:32.000Z",
+              "updatedAt": "2026-07-28T01:31:32.000Z",
+              "uid": "35240-85c7cf54-07e2-4eb4-b782-ee74df65ed16"
+            }
+          ],
+          "id": "3e553b3b-c250-4056-a8e2-b39ecfd54470",
+          "createdAt": "2026-07-28T01:31:32.000Z",
+          "updatedAt": "2026-07-28T01:31:32.000Z",
+          "uid": "35240-3e553b3b-c250-4056-a8e2-b39ecfd54470"
+        }
+      ],
+      "id": "a87e2426-37af-432e-bff0-9b1a9a05d8e1",
+      "createdAt": "2026-07-28T01:31:32.000Z",
+      "updatedAt": "2026-07-28T01:31:32.000Z",
+      "uid": "35240-a87e2426-37af-432e-bff0-9b1a9a05d8e1"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.docparser.com/v1"
+    }
+  ]
+}
