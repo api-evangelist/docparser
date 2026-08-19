@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Docparser REST Documents API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a document by file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.docparser.com/v1/document/upload/:parserId",
+            "params": [
+              {
+                "name": "parserId",
+                "value": "abc123xyz",
+                "type": "path",
+                "description": "The unique identifier of the document parser."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a document to the specified parser using multipart form data (file upload) or base64-encoded content. The document is queued for parsing immediately upon upload."
+        },
+        {
+          "info": {
+            "name": "Reparse documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.docparser.com/v1/document/reparse/:parserId",
+            "params": [
+              {
+                "name": "parserId",
+                "value": "abc123xyz",
+                "type": "path",
+                "description": "The unique identifier of the document parser."
+              }
+            ]
+          },
+          "docs": "Reschedules parsing for previously uploaded documents under the specified parser. Useful after updating parser rules."
+        },
+        {
+          "info": {
+            "name": "Reintegrate documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.docparser.com/v1/document/reintegrate/:parserId",
+            "params": [
+              {
+                "name": "parserId",
+                "value": "abc123xyz",
+                "type": "path",
+                "description": "The unique identifier of the document parser."
+              }
+            ]
+          },
+          "docs": "Reschedules integration (webhook delivery / third-party push) for previously parsed documents under the specified parser."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

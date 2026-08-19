@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Docparser REST Documents Parsers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Parsers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all parsers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.docparser.com/v1/parsers"
+          },
+          "docs": "Returns a list of all document parsers created in the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Get parser model layouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.docparser.com/v1/parser/models/:parserId",
+            "params": [
+              {
+                "name": "parserId",
+                "value": "abc123xyz",
+                "type": "path",
+                "description": "The unique identifier of the document parser."
+              }
+            ]
+          },
+          "docs": "Returns the list of model layouts configured for a specific parser."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

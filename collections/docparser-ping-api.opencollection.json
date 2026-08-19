@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Docparser REST Documents Ping API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ping / health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.docparser.com/v1/ping"
+          },
+          "docs": "Tests API connectivity and authentication. Returns a success response if the API key is valid."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

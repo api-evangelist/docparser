@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Docparser REST Documents Results API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get results for a single document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.docparser.com/v1/results/:parserId/:documentId",
+            "params": [
+              {
+                "name": "parserId",
+                "value": "abc123xyz",
+                "type": "path",
+                "description": "The unique identifier of the document parser."
+              },
+              {
+                "name": "documentId",
+                "value": "doc_abc123",
+                "type": "path",
+                "description": "The unique identifier of the document."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map."
+              }
+            ]
+          },
+          "docs": "Retrieves the parsed data for a specific document. Rate limited to 60 calls per minute."
+        },
+        {
+          "info": {
+            "name": "Get results for all documents in a parser",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.docparser.com/v1/results/:parserId",
+            "params": [
+              {
+                "name": "parserId",
+                "value": "abc123xyz",
+                "type": "path",
+                "description": "The unique identifier of the document parser."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format for parsed results. \"object\" (recommended) returns structured JSON; \"flat\" returns a flat key-value map."
+              },
+              {
+                "name": "list",
+                "value": "",
+                "type": "query",
+                "description": "Filter documents by list type."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to documents processed after this date (ISO 8601)."
+              },
+              {
+                "name": "remote_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by remote_id assigned at upload."
+              },
+              {
+                "name": "include_processing_queue",
+                "value": "",
+                "type": "query",
+                "description": "Include documents still in the processing queue."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results."
+              }
+            ]
+          },
+          "docs": "Retrieves parsed data for multiple documents belonging to the specified parser. Supports filtering, sorting, and pagination. Rate limited to 30 calls per minute."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,370 @@
+{
+  "item": [
+    {
+      "id": "16ec9307-4f3e-4a43-a13d-5b6f0c2d8493",
+      "name": "Parsers",
+      "description": {
+        "content": "Manage document parser configurations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "78cab83d-fa92-4089-b979-67421ec9538b",
+          "name": "List all parsers",
+          "request": {
+            "name": "List all parsers",
+            "description": {
+              "content": "Returns a list of all document parsers created in the authenticated account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parsers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad124ebb-c42a-442f-b66a-48b6c530ce50",
+              "name": "List of parsers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parsers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"abc123xyz\",\n    \"label\": \"Invoice Parser\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f10909b9-87e1-4b95-8b3e-d3303c6f0fae",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parsers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "293ad592-1fc1-412d-a521-ad9022d31214",
+          "name": "Get parser model layouts",
+          "request": {
+            "name": "Get parser model layouts",
+            "description": {
+              "content": "Returns the list of model layouts configured for a specific parser.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parser",
+                "models",
+                ":parserId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parserId",
+                  "description": "(Required) The unique identifier of the document parser."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3347d6c-bc77-4492-97b7-c505471d6006",
+              "name": "List of model layouts for the parser",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parser",
+                    "models",
+                    ":parserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parserId",
+                      "description": "(Required) The unique identifier of the document parser."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"label\": \"string\",\n    \"layout_type\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"label\": \"string\",\n    \"layout_type\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "983afddf-6dfb-40ff-a79a-4b814a25f9ac",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parser",
+                    "models",
+                    ":parserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parserId",
+                      "description": "(Required) The unique identifier of the document parser."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddc6a48b-4626-4614-9823-af9f746a67c1",
+              "name": "Resource not found. Check parserId or documentId.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parser",
+                    "models",
+                    ":parserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parserId",
+                      "description": "(Required) The unique identifier of the document parser."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.docparser.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eda62547-aeb0-468d-a787-edeea5e9ef80",
+    "name": "Docparser REST Documents Parsers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.\n\nContact Support:\n Name: Docparser Support",
+      "type": "text/plain"
+    }
+  }
+}
