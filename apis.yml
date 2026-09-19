@@ -69,6 +69,8 @@ apis:
   humanURL: https://docparser.com/api/
   baseURL: https://api.docparser.com/v1
   tags:
+  - Parser
+  tags_raw:
   - Parsers
   properties:
   - type: OpenAPI
