@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Docparser REST Documents Parsers API
+  title: Docparser REST Parsers API
   description: The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.
   version: '1.0'
   contact:
@@ -79,16 +79,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    parserId:
-      name: parserId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique identifier of the document parser.
-      example: abc123xyz
   schemas:
+    Parser:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique parser identifier.
+          example: abc123xyz
+        label:
+          type: string
+          description: Human-readable name of the parser.
+          example: Invoice Parser
+      required:
+      - id
+      - label
     ErrorResponse:
       type: object
       properties:
@@ -110,20 +115,15 @@ components:
         layout_type:
           type: string
           description: Type of layout (e.g., zonal, pattern).
-    Parser:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique parser identifier.
-          example: abc123xyz
-        label:
-          type: string
-          description: Human-readable name of the parser.
-          example: Invoice Parser
-      required:
-      - id
-      - label
+  parameters:
+    parserId:
+      name: parserId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the document parser.
+      example: abc123xyz
   securitySchemes:
     basicAuth:
       type: http

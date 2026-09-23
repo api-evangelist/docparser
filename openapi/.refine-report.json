@@ -1,10 +1,7 @@
 {
   "provider": "docparser",
   "sources": [
-    "docparser-documents-api-openapi.yml",
-    "docparser-parsers-api-openapi.yml",
-    "docparser-ping-api-openapi.yml",
-    "docparser-results-api-openapi.yml"
+    "_original/docparser-rest-api-openapi.yml"
   ],
   "outputs": [
     "docparser-documents-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "docparser-rest-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "docparser-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "docparser-parsers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "docparser-ping-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "docparser-results-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

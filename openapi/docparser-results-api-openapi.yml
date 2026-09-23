@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Docparser REST Documents Results API
+  title: Docparser REST Results API
   description: The Docparser REST API provides programmatic access to document parsing and data extraction capabilities. Developers can upload documents via file upload, base64 encoding, or public URL fetch, retrieve parsed results for individual or multiple documents, manage parser configurations, and trigger re-parsing or re-integration operations. The API uses HTTP Basic Auth with the API key as the username and enforces per-minute rate limits on result retrieval endpoints.
   version: '1.0'
   contact:
@@ -130,6 +130,52 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    RateLimited:
+      description: Rate limit exceeded. Results endpoints allow 60 req/min (single document) or 30 req/min (parser-level).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found. Check parserId or documentId.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    documentId:
+      name: documentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the document.
+      example: doc_abc123
+    format:
+      name: format
+      in: query
+      schema:
+        type: string
+        enum:
+        - object
+        - flat
+        default: object
+      description: Output format for parsed results. "object" (recommended) returns structured JSON; "flat" returns a flat key-value map.
+    parserId:
+      name: parserId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the document parser.
+      example: abc123xyz
   schemas:
     ParsedResult:
       type: object
@@ -174,52 +220,6 @@ components:
         message:
           type: string
           description: Human-readable error description.
-  responses:
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found. Check parserId or documentId.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RateLimited:
-      description: Rate limit exceeded. Results endpoints allow 60 req/min (single document) or 30 req/min (parser-level).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    parserId:
-      name: parserId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique identifier of the document parser.
-      example: abc123xyz
-    documentId:
-      name: documentId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique identifier of the document.
-      example: doc_abc123
-    format:
-      name: format
-      in: query
-      schema:
-        type: string
-        enum:
-        - object
-        - flat
-        default: object
-      description: Output format for parsed results. "object" (recommended) returns structured JSON; "flat" returns a flat key-value map.
   securitySchemes:
     basicAuth:
       type: http
