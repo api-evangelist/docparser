@@ -120,32 +120,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    BadRequest:
-      description: Bad request. Check parameters and payload.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found. Check parserId or documentId.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    SuccessResponse:
-      type: object
-      properties:
-        msg:
-          type: string
-          description: Confirmation message.
     DocumentUploadResponse:
       type: object
       properties:
@@ -162,6 +137,12 @@ components:
         quota_left:
           type: integer
           description: Remaining quota units in the current billing period.
+    SuccessResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          description: Confirmation message.
     ErrorResponse:
       type: object
       properties:
@@ -171,6 +152,25 @@ components:
         message:
           type: string
           description: Human-readable error description.
+  responses:
+    NotFound:
+      description: Resource not found. Check parserId or documentId.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request. Check parameters and payload.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     parserId:
       name: parserId

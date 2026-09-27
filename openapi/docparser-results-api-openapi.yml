@@ -150,6 +150,14 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    parserId:
+      name: parserId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the document parser.
+      example: abc123xyz
     documentId:
       name: documentId
       in: path
@@ -168,14 +176,6 @@ components:
         - flat
         default: object
       description: Output format for parsed results. "object" (recommended) returns structured JSON; "flat" returns a flat key-value map.
-    parserId:
-      name: parserId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique identifier of the document parser.
-      example: abc123xyz
   schemas:
     ParsedResult:
       type: object
