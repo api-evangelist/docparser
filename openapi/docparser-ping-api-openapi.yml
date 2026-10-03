@@ -42,12 +42,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    PingResponse:
-      type: object
-      properties:
-        msg:
-          type: string
-          example: pong
     ErrorResponse:
       type: object
       properties:
@@ -57,6 +51,12 @@ components:
         message:
           type: string
           description: Human-readable error description.
+    PingResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: pong
   responses:
     Unauthorized:
       description: Authentication failed. Check your API key.

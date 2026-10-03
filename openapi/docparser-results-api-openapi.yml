@@ -131,14 +131,14 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
-    RateLimited:
-      description: Rate limit exceeded. Results endpoints allow 60 req/min (single document) or 30 req/min (parser-level).
+    NotFound:
+      description: Resource not found. Check parserId or documentId.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found. Check parserId or documentId.
+    RateLimited:
+      description: Rate limit exceeded. Results endpoints allow 60 req/min (single document) or 30 req/min (parser-level).
       content:
         application/json:
           schema:
@@ -150,6 +150,16 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    format:
+      name: format
+      in: query
+      schema:
+        type: string
+        enum:
+        - object
+        - flat
+        default: object
+      description: Output format for parsed results. "object" (recommended) returns structured JSON; "flat" returns a flat key-value map.
     parserId:
       name: parserId
       in: path
@@ -166,17 +176,16 @@ components:
         type: string
       description: The unique identifier of the document.
       example: doc_abc123
-    format:
-      name: format
-      in: query
-      schema:
-        type: string
-        enum:
-        - object
-        - flat
-        default: object
-      description: Output format for parsed results. "object" (recommended) returns structured JSON; "flat" returns a flat key-value map.
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code or short identifier.
+        message:
+          type: string
+          description: Human-readable error description.
     ParsedResult:
       type: object
       description: A parsed document result. The exact fields depend on the parser configuration. Common fields are listed; custom extracted fields are appended dynamically.
@@ -211,15 +220,6 @@ components:
           description: Timestamp when parsing was completed.
       additionalProperties:
         description: Custom fields extracted by parser rules (e.g., invoice_number, total_amount).
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code or short identifier.
-        message:
-          type: string
-          description: Human-readable error description.
   securitySchemes:
     basicAuth:
       type: http
