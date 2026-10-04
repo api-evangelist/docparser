@@ -66,6 +66,15 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    parserId:
+      name: parserId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the document parser.
+      example: abc123xyz
   responses:
     NotFound:
       description: Resource not found. Check parserId or documentId.
@@ -80,18 +89,15 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ParserModel:
+    ErrorResponse:
       type: object
       properties:
-        id:
+        error:
           type: string
-          description: Model layout identifier.
-        label:
+          description: Error code or short identifier.
+        message:
           type: string
-          description: Human-readable label for the model layout.
-        layout_type:
-          type: string
-          description: Type of layout (e.g., zonal, pattern).
+          description: Human-readable error description.
     Parser:
       type: object
       properties:
@@ -106,24 +112,18 @@ components:
       required:
       - id
       - label
-    ErrorResponse:
+    ParserModel:
       type: object
       properties:
-        error:
+        id:
           type: string
-          description: Error code or short identifier.
-        message:
+          description: Model layout identifier.
+        label:
           type: string
-          description: Human-readable error description.
-  parameters:
-    parserId:
-      name: parserId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique identifier of the document parser.
-      example: abc123xyz
+          description: Human-readable label for the model layout.
+        layout_type:
+          type: string
+          description: Type of layout (e.g., zonal, pattern).
   securitySchemes:
     basicAuth:
       type: http
