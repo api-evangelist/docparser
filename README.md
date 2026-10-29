@@ -64,35 +64,164 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Docparser is a document data extraction REST API that enables developers and businesses to parse structured data from PDFs, Word documents, and scanned image files using custom parsing rules. The platform supports advanced zonal OCR, pattern recognition, and anchor keyword detection for automating data extraction from invoices, contracts, purchase orders, bank statements, HR forms, and shipping documents.
+Docparser is a document data extraction REST API that enables developers and businesses to parse structured data from PDFs, Word documents, and scanned image files using custom parsing rules. The platform supports advanced zonal OCR, pattern recognition, and anchor keyword detection for automating data extraction from invoices, contracts, purchase orders, bank statements, HR forms, and shipping documents. Docparser provides a REST API with endpoints for uploading documents, fetching parsed results, managing parsers, and re-processing documents, along with webhook support for real-time data delivery and official SDKs for PHP, Node.js, and Salesforce Apex.
 
-## API
+**Areas:** Document Parsing · Data Extraction · PDF · OCR · Document Automation · Invoices · Contracts · REST API
 
-The Docparser REST API base URL is `https://api.docparser.com/v1`. Key capabilities include:
+## Docparser on APIs.io
 
-- Upload documents via file upload, base64 encoding, or public URL
-- Retrieve parsed results for individual or multiple documents
-- List and manage parser configurations
-- Re-parse or re-integrate previously processed documents
-- Webhook delivery for real-time parsed data
+Everything profiled for Docparser is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/docparser/](https://apis.io/providers/docparser/)** — or go straight to one of the APIs or properties below.
 
-## Authentication
+### APIs (4)
 
-HTTP Basic Auth using the API key as the username (recommended), or via the `api_key` header, POST field, or URL parameter. All requests require HTTPS.
+- [Docparser Documents API](https://apis.io/apis/docparser/docparser-documents-api/) — Upload and manage documents for parsing
+- [Docparser Parsers API](https://apis.io/apis/docparser/docparser-parsers-api/) — Manage document parser configurations
+- [Docparser Ping API](https://apis.io/apis/docparser/docparser-ping-api/) — Health check and connectivity test
+- [Docparser Results API](https://apis.io/apis/docparser/docparser-results-api/) — Retrieve parsed data results
 
-## SDKs
+### Published properties
 
-- PHP: https://github.com/Docparser/Docparser-PHP
-- Node.js: https://github.com/Docparser/Docparser-Node
-- Salesforce Apex: https://github.com/Docparser/Docparser-Apex
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Links
+#### Agentic access (1)
 
-- Website: https://docparser.com
-- API Reference: https://docparser.com/api/
-- GitHub: https://github.com/Docparser
-- Pricing: https://docparser.com/pricing/
-- Status: https://status.docparser.com/
-- Blog: https://docparser.com/blog/
-- LinkedIn: https://www.linkedin.com/company/docparser
-- X: https://x.com/docparser
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Docparser Agentic Access](https://apis.io/agentic-access/docparser/docparser-agentic-access/)
+
+#### JSON Schema (3)
+
+The data models the API reads and writes.
+
+- [Docparser Document Upload Response](https://apis.io/schemas/docparser/docparser-document-upload/)
+- [Docparser Parsed Result](https://apis.io/schemas/docparser/docparser-parsed-result/)
+- [Docparser Parser](https://apis.io/schemas/docparser/docparser-parser/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Docparser Context](https://apis.io/jsonld/docparser/docparser-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Docparser Vocabulary](https://apis.io/vocabularies/docparser/docparser-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Get Results By Document Response](https://apis.io/examples/docparser/get-results-by-document-response/)
+- [Ping Response](https://apis.io/examples/docparser/ping-response/)
+- [Upload Document Base64 Request](https://apis.io/examples/docparser/upload-document-base64-request/)
+- [Upload Document Response](https://apis.io/examples/docparser/upload-document-response/)
+
+#### Collections (8)
+
+Postman and Open Collection request collections.
+
+- [Docparser REST Documents API](https://apis.io/collections/docparser/open-docparser-documents-api/)
+- [Docparser REST Documents Parsers API](https://apis.io/collections/docparser/open-docparser-parsers-api/)
+- [Docparser REST Documents Ping API](https://apis.io/collections/docparser/open-docparser-ping-api/)
+- [Docparser REST Documents Results API](https://apis.io/collections/docparser/open-docparser-results-api/)
+- [Docparser REST Documents API](https://apis.io/collections/docparser/postman-docparser-documents-api/)
+- [Docparser REST Documents Parsers API](https://apis.io/collections/docparser/postman-docparser-parsers-api/)
+- [Docparser REST Documents Ping API](https://apis.io/collections/docparser/postman-docparser-ping-api/)
+- [Docparser REST Documents Results API](https://apis.io/collections/docparser/postman-docparser-results-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Docparser — jsonschema rules](https://apis.io/rules/docparser/docparser-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Docparser Authentication](https://apis.io/security/docparser/docparser-authentication/)
+- [Docparser Domain Security](https://apis.io/security/docparser/docparser-domain-security/)
+- [Docparser Trust Center](https://apis.io/security/docparser/docparser-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Docparser Plans Pricing](https://apis.io/plans/docparser/docparser-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Docparser Rate Limits](https://apis.io/rate-limits/docparser/docparser-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Docparser Finops](https://apis.io/finops/docparser/docparser-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://docparser.com)
+- [Documentation](https://docparser.com/api/)
+- [Pricing](https://docparser.com/pricing/)
+- [Blog](https://docparser.com/blog/)
+- [Status](https://status.docparser.com/)
+
+## API Evangelist rating
+
+**Kin Score 38.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 56.3 |
+| Contract governance | 9.8 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 26.3 |
+
+**Agent readiness 26.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | unknown |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 21.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/docparser/](https://apis.io/providers/docparser/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Docparser: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/docparser/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
